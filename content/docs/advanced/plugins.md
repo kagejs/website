@@ -3,15 +3,17 @@ title: Plugins
 description: Extend Kage with decorators, derived values, and lifecycle hooks
 ---
 
-Plugins extend Kage's functionality through decorators, derived values, and lifecycle hooks.
+Kage provides **core context APIs** to extend your application's functionality. **Plugins** are reusable functions that compose these APIs together.
 
-## Understanding Plugins
+## Core Context APIs
 
-Plugins in Kage provide three core mechanisms to extend your application:
+Kage provides three core APIs to extend the request context:
 
-1. **`decorate`** - Add static properties available in all handlers
+1. **`decorate`** - Add immutable singleton values available in all handlers
 2. **`derive`** - Add computed values calculated per request
 3. **`state`** - Add shared mutable state across requests
+
+These APIs can be used directly or composed into reusable **plugins**.
 
 ### The Three Pillars
 
@@ -342,7 +344,7 @@ const app = new Kage()
 
 ## Creating Plugins
 
-A plugin is a function that takes a Kage instance and returns a modified version:
+A **plugin** is a function that takes a Kage instance and returns a modified version. Plugins use the core context APIs (`decorate`, `derive`, `state`) and lifecycle hooks to add reusable functionality:
 
 ```ts
 import { Kage, type P } from "jsr:@kage/core";
