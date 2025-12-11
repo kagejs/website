@@ -1,0 +1,921 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Geist Mono", monospace;
+  --font-serif: "Inter", system-ui, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius: 0;
+}
+
+:root {
+  --background: 5 5 5;
+  --foreground: 255 255 255;
+  --card: 255 255 255 / 0.03;
+  --card-foreground: 230 232 236;
+  --border: 255 255 255 / 0.08;
+  --primary: 52 211 153;
+  --primary-foreground: 0 0 0;
+  --popover: 10 10 10;
+  --popover-foreground: 230 232 236;
+  --secondary: 20 20 20;
+  --secondary-foreground: 230 232 236;
+  --muted: 30 30 30;
+  --muted-foreground: 156 163 175;
+  --accent: 20 20 20;
+  --accent-foreground: 230 232 236;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --input: 30 30 30;
+  --ring: 52 211 153;
+  --sidebar: 5 5 5;
+  --sidebar-foreground: 230 232 236;
+  --sidebar-primary: 52 211 153;
+  --sidebar-primary-foreground: 0 0 0;
+  --sidebar-accent: 20 20 20;
+  --sidebar-accent-foreground: 230 232 236;
+  --sidebar-border: 255 255 255 / 0.08;
+  --sidebar-ring: 52 211 153;
+}
+
+.dark {
+  --background: 5 5 5;
+  --foreground: 255 255 255;
+  --card: 255 255 255 / 0.03;
+  --card-foreground: 230 232 236;
+  --border: 255 255 255 / 0.08;
+  --primary: 52 211 153;
+  --primary-foreground: 0 0 0;
+  --popover: 10 10 10;
+  --popover-foreground: 230 232 236;
+  --secondary: 20 20 20;
+  --secondary-foreground: 230 232 236;
+  --muted: 30 30 30;
+  --muted-foreground: 156 163 175;
+  --accent: 20 20 20;
+  --accent-foreground: 230 232 236;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --input: 30 30 30;
+  --ring: 52 211 153;
+  --sidebar: 5 5 5;
+  --sidebar-foreground: 230 232 236;
+  --sidebar-primary: 52 211 153;
+  --sidebar-primary-foreground: 0 0 0;
+  --sidebar-accent: 20 20 20;
+  --sidebar-accent-foreground: 230 232 236;
+  --sidebar-border: 255 255 255 / 0.08;
+  --sidebar-ring: 52 211 153;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: rgba(52, 211, 153, 0.3);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+}
+
+/* ==========================================================================
+   HERO - Japanese minimalist / Zen aesthetic
+   ========================================================================== */
+
+/* Ensō-inspired circle */
+.zen-circle {
+  width: 500px;
+  height: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  animation: zen-breathe 8s ease-in-out infinite;
+}
+
+.zen-circle-shadow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border: 1px solid rgba(52, 211, 153, 0.05);
+  border-radius: 50%;
+  animation: zen-breathe 8s ease-in-out infinite 0.5s;
+}
+
+@keyframes zen-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.6;
+  }
+}
+
+/* Zen code blocks */
+.zen-code-block {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 1px solid rgba(52, 211, 153, 0.1);
+}
+
+.zen-code-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 1px;
+  height: 40px;
+  background: rgba(52, 211, 153, 0.4);
+}
+
+.zen-code-block .my-6 {
+  margin: 0;
+}
+
+.zen-code-block .shiki-wrapper [class*="pre"],
+.zen-code-block .shiki-wrapper pre {
+  background: transparent !important;
+  border: none !important;
+  padding: 24px !important;
+  margin: 0 !important;
+}
+
+.zen-code-block-sm {
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.zen-code-block-sm .my-6 {
+  margin: 0;
+}
+
+.zen-code-block-sm .shiki-wrapper [class*="pre"],
+.zen-code-block-sm .shiki-wrapper pre {
+  background: transparent !important;
+  border: none !important;
+  padding: 20px !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================================
+   KAGE LOGO
+   ========================================================================== */
+
+.kage-logo {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kage-logo-inner {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow:
+    0 0 20px rgba(52, 211, 153, 0.4),
+    0 0 40px rgba(52, 211, 153, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.group:hover .kage-logo-inner {
+  transform: rotate(45deg) scale(1.1);
+  box-shadow:
+    0 0 30px rgba(52, 211, 153, 0.6),
+    0 0 60px rgba(52, 211, 153, 0.3);
+}
+
+.kage-logo-small {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kage-logo-inner-small {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   CODE WINDOWS (Landing page)
+   ========================================================================== */
+
+.code-window {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.code-window .my-6 {
+  margin: 0;
+}
+
+.code-window .shiki-wrapper [class*="pre"],
+.code-window .shiki-wrapper pre {
+  background: transparent !important;
+  border: none !important;
+  padding: 16px !important;
+  margin: 0 !important;
+}
+
+.code-window-sm {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.code-window-sm .my-6 {
+  margin: 0;
+}
+
+.code-window-sm .shiki-wrapper [class*="pre"],
+.code-window-sm .shiki-wrapper pre {
+  background: transparent !important;
+  border: none !important;
+  padding: 16px !important;
+  margin: 0 !important;
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ==========================================================================
+   DOCUMENTATION CODE BLOCKS
+   ========================================================================== */
+
+.code-block {
+  @apply bg-black/50 border border-white/10 p-4 overflow-x-auto;
+  font-family: "JetBrains Mono", "Geist Mono", monospace;
+}
+
+.code-block code {
+  @apply text-sm leading-relaxed;
+}
+
+/* Syntax highlighting tokens (fallback) */
+.token-keyword {
+  color: #c678dd;
+}
+
+.token-string {
+  color: #98c379;
+}
+
+.token-number {
+  color: #d19a66;
+}
+
+.token-comment {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.token-function {
+  color: #61afef;
+}
+
+.token-builtin {
+  color: #e5c07b;
+}
+
+.token-type {
+  color: #e5c07b;
+}
+
+.token-property {
+  color: #e06c75;
+}
+
+.token-punctuation {
+  color: #abb2bf;
+}
+
+/* ==========================================================================
+   COMPONENTS
+   ========================================================================== */
+
+.glow-emerald {
+  box-shadow: 0 0 60px rgba(52, 211, 153, 0.15);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, rgb(52, 211, 153), rgb(34, 197, 94));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.doc-link {
+  @apply text-emerald-400 hover:text-emerald-300 underline underline-offset-4 decoration-emerald-400/30 hover:decoration-emerald-300/50 transition-colors;
+}
+
+.sidebar-link {
+  @apply block px-3 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors;
+}
+
+.sidebar-link.active {
+  @apply text-emerald-400 bg-emerald-400/10 border-l-2 border-emerald-400;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-emerald-500 text-black text-sm font-medium hover:bg-emerald-400 transition-colors;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-white/5 border border-white/10 text-sm text-white font-medium hover:bg-white/10 transition-colors;
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   PROSE STYLES
+   ========================================================================== */
+
+.prose-invert {
+  --tw-prose-body: rgb(200 205 212);
+  --tw-prose-headings: rgb(240 242 245);
+  --tw-prose-links: rgb(52 211 153);
+  --tw-prose-bold: rgb(240 242 245);
+  --tw-prose-code: rgb(52 211 153);
+  --tw-prose-pre-bg: rgb(0 0 0 / 0.4);
+  --tw-prose-pre-code: rgb(200 205 212);
+}
+
+/* ==========================================================================
+   DOCUMENTATION CONTENT - Zen aesthetic
+   ========================================================================== */
+
+.docs-content {
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+}
+
+.docs-content h2 {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.docs-content h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.docs-content h4 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.docs-content p {
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+}
+
+.docs-content a {
+  color: rgba(52, 211, 153, 0.8);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(52, 211, 153, 0.2);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.docs-content a:hover {
+  color: rgba(52, 211, 153, 1);
+  border-color: rgba(52, 211, 153, 0.5);
+}
+
+.docs-content strong {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.docs-content code:not(pre code) {
+  font-family: "JetBrains Mono", "Geist Mono", monospace;
+  font-size: 0.85em;
+  padding: 0.15em 0.4em;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(52, 211, 153, 0.85);
+  border-left: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+.docs-content pre {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 1px solid rgba(52, 211, 153, 0.15);
+  overflow-x: auto;
+}
+
+.docs-content pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 1px;
+  height: 32px;
+  background: rgba(52, 211, 153, 0.5);
+}
+
+.docs-content pre code {
+  font-family: "JetBrains Mono", "Geist Mono", monospace;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.docs-content ul {
+  margin: 1rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.docs-content ul li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+}
+
+.docs-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 4px;
+  height: 1px;
+  background: rgba(52, 211, 153, 0.4);
+}
+
+.docs-content ol {
+  margin: 1rem 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: docs-counter;
+}
+
+.docs-content ol li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+  counter-increment: docs-counter;
+}
+
+.docs-content ol li::before {
+  content: counter(docs-counter);
+  position: absolute;
+  left: 0;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(52, 211, 153, 0.6);
+}
+
+.docs-content blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.docs-content hr {
+  margin: 2.5rem 0;
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.docs-content table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+.docs-content thead {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.docs-content th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.docs-content td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.docs-content img {
+  margin: 1.5rem 0;
+  max-width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Shiki code blocks in docs */
+.docs-content .shiki-wrapper {
+  margin: 1.5rem 0;
+}
+
+.docs-content .shiki-wrapper pre {
+  margin: 0;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border-left: 1px solid rgba(52, 211, 153, 0.15);
+}
+
+.docs-content .shiki-wrapper pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 1px;
+  height: 32px;
+  background: rgba(52, 211, 153, 0.5);
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-black;
+}
+
+/* ==========================================================================
+   MARKDOWN BODY - Uses same styles as docs-content
+   ========================================================================== */
+
+.markdown-body {
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+}
+
+.markdown-body h2 {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.markdown-body h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.markdown-body h4 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.markdown-body p {
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+}
+
+.markdown-body a {
+  color: rgba(52, 211, 153, 0.8);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(52, 211, 153, 0.2);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.markdown-body a:hover {
+  color: rgba(52, 211, 153, 1);
+  border-color: rgba(52, 211, 153, 0.5);
+}
+
+.markdown-body strong {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.markdown-body code:not(pre code) {
+  font-family: "JetBrains Mono", "Geist Mono", monospace;
+  font-size: 0.85em;
+  padding: 0.15em 0.4em;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(52, 211, 153, 0.85);
+  border-left: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+.markdown-body ul {
+  margin: 1rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.markdown-body ul li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+}
+
+.markdown-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 4px;
+  height: 1px;
+  background: rgba(52, 211, 153, 0.4);
+}
+
+.markdown-body ol {
+  margin: 1rem 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: md-counter;
+}
+
+.markdown-body ol li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+  counter-increment: md-counter;
+}
+
+.markdown-body ol li::before {
+  content: counter(md-counter);
+  position: absolute;
+  left: 0;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(52, 211, 153, 0.6);
+}
+
+.markdown-body blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.markdown-body blockquote p {
+  margin-bottom: 0;
+}
+
+.markdown-body hr {
+  margin: 2.5rem 0;
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.markdown-body table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+.markdown-body thead {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.markdown-body th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.markdown-body td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Shiki code blocks in markdown */
+.markdown-body .shiki-wrapper {
+  margin: 1.5rem 0;
+}
+
+.markdown-body .shiki-wrapper pre {
+  position: relative;
+  margin: 0;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border-left: 1px solid rgba(52, 211, 153, 0.15);
+  overflow-x: auto;
+}
+
+.markdown-body .shiki-wrapper pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 1px;
+  height: 32px;
+  background: rgba(52, 211, 153, 0.5);
+}
+
+.markdown-body .shiki-wrapper pre code {
+  font-family: "JetBrains Mono", "Geist Mono", monospace;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==========================================================================
+   COPY BUTTON
+   ========================================================================== */
+
+.shiki-wrapper {
+  position: relative;
+}
+
+.shiki-wrapper .copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s, background 0.2s;
+}
+
+.shiki-wrapper:hover .copy-btn {
+  opacity: 1;
+}
+
+.shiki-wrapper .copy-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.shiki-wrapper .copy-btn .hidden {
+  display: none;
+}
