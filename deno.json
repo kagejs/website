@@ -30,7 +30,8 @@
     "shiki": "npm:shiki@^3.19.0",
     "marked": "npm:marked@^15.0.4",
     "marked-gfm-heading-id": "npm:marked-gfm-heading-id@^4.1.1",
-    "@std/yaml": "jsr:@std/yaml@^1.0.0"
+    "@std/yaml": "jsr:@std/yaml@^1.0.0",
+    "vite-plugin-static-copy": "npm:vite-plugin-static-copy@^3.1.4"
   },
   "compilerOptions": {
     "lib": [

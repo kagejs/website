@@ -16,7 +16,7 @@ export default function Header() {
               Docs
             </a>
             <a
-              href="/docs/api"
+              href="/docs/api/kage"
               class="text-sm text-white/40 hover:text-white/70 transition-colors font-light"
             >
               API

@@ -24,16 +24,21 @@ export const handler = define.handlers<Data>({
       throw new HttpError(404);
     }
 
-    const filePath = new URL(
-      `../../content/docs/${entry.file}`,
-      import.meta.url
-    );
+    const prodPath = new URL("../content/docs/", import.meta.url).pathname;
+    const devPath = new URL("../../content/docs/", import.meta.url).pathname;
 
     let parsed;
+    let filePath = `${prodPath}${entry.file}`;
+
     try {
-      parsed = await loadMarkdownFile(filePath.pathname);
+      parsed = await loadMarkdownFile(filePath);
     } catch {
-      throw new HttpError(404);
+      filePath = `${devPath}${entry.file}`;
+      try {
+        parsed = await loadMarkdownFile(filePath);
+      } catch {
+        throw new HttpError(404);
+      }
     }
 
     const { prev, next } = getNavigation(slug);
