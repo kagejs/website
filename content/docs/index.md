@@ -38,13 +38,13 @@ Run with: `deno run --allow-net main.ts`
 
 ## Powerful When You Need It
 
-### Extend Context with Plugins
+### Extend Context
 
-Add authentication, database clients, or any custom logic:
+Add authentication, database clients, or any custom logic using core APIs:
 
 ```ts
 const app = new Kage()
-  // Decorate: static values
+  // Decorate: immutable singleton values
   .decorate("version", "1.0.0")
 
   // Derive: computed per request
@@ -117,7 +117,8 @@ const app = new Kage()
 ## Key Features
 
 - **Schema Validation** - TypeBox integration with full type inference
-- **Plugins** - Extend context with `decorate`, `derive`, and `state`
+- **Context Extensions** - Extend handlers with `decorate`, `derive`, and `state`
+- **Plugins** - Composable functions that use context extensions
 - **Lifecycle Hooks** - `onRequest`, `onBeforeHandle`, `onAfterHandle`, `onResponse`
 - **Worker Pools** - Inline worker functions with automatic pooling
 - **Route Groups** - Organize routes with shared middleware and prefixes
@@ -128,5 +129,5 @@ const app = new Kage()
 - [Quick Start](/docs/quickstart) - Build your first API
 - [Routing](/docs/concepts/routing) - HTTP methods, params, and RESTful routes
 - [Schema Validation](/docs/concepts/schema) - Type-safe request validation
-- [Plugins](/docs/advanced/plugins) - Extend with `decorate`, `derive`, `state`
+- [Plugins](/docs/advanced/plugins) - Create reusable extensions with `decorate`, `derive`, `state`
 - [Workers](/docs/advanced/workers) - Parallel processing with worker pools
