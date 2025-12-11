@@ -42,7 +42,6 @@ export default define.page(function Home() {
   return (
     <div class="dark">
       <div class="min-h-screen bg-[#0a0a0a] text-white selection:bg-emerald-500/30 overflow-x-hidden">
-        {/* Header */}
         <header class="relative z-30">
           <div class="max-w-5xl mx-auto px-8 h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-3 group">
@@ -66,21 +65,14 @@ export default define.page(function Home() {
         </header>
 
         <main>
-          {/* Hero - Japanese minimalist */}
           <section class="relative min-h-[85vh] flex items-center justify-center px-8">
-            {/* Zen circle - Ensō inspired */}
             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div class="zen-circle" />
               <div class="zen-circle-shadow" />
             </div>
-
-            {/* Vertical line accents */}
             <div class="absolute left-[15%] top-[20%] bottom-[20%] w-px bg-gradient-to-b from-transparent via-white/[0.03] to-transparent" />
             <div class="absolute right-[15%] top-[25%] bottom-[25%] w-px bg-gradient-to-b from-transparent via-white/[0.03] to-transparent" />
-
-            {/* Content */}
             <div class="relative z-10 text-center max-w-2xl">
-              {/* Japanese character as subtle background */}
               <div class="absolute -top-20 left-1/2 -translate-x-1/2 text-[180px] font-light text-white/[0.02] select-none pointer-events-none leading-none tracking-wider">
                 カゲ
               </div>
@@ -115,12 +107,8 @@ export default define.page(function Home() {
                 </div>
               </div>
             </div>
-
-            {/* Bottom accent line */}
             <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-white/5 to-transparent" />
           </section>
-
-          {/* Code section */}
           <section class="py-32 px-8">
             <div class="max-w-5xl mx-auto">
               <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
@@ -156,8 +144,6 @@ export default define.page(function Home() {
               </div>
             </div>
           </section>
-
-          {/* Features - ma (negative space) focused */}
           <section class="py-32 px-8 border-t border-white/[0.03]">
             <div class="max-w-5xl mx-auto">
               <p class="text-emerald-400/60 text-xs tracking-[0.2em] uppercase mb-4 text-center">
@@ -203,8 +189,6 @@ export default define.page(function Home() {
               </div>
             </div>
           </section>
-
-          {/* Code examples */}
           <section class="py-32 px-8 border-t border-white/[0.03]">
             <div class="max-w-5xl mx-auto">
               <div class="grid md:grid-cols-2 gap-12">
@@ -223,8 +207,6 @@ export default define.page(function Home() {
               </div>
             </div>
           </section>
-
-          {/* CTA */}
           <section class="py-32 px-8 border-t border-white/[0.03]">
             <div class="max-w-5xl mx-auto text-center">
               <p class="text-5xl font-light text-white/[0.03] mb-8 select-none tracking-wider">カゲ</p>
@@ -253,8 +235,6 @@ export default define.page(function Home() {
             </div>
           </section>
         </main>
-
-        {/* Footer */}
         <footer class="border-t border-white/[0.03] py-12 px-8">
           <div class="max-w-5xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -265,7 +245,7 @@ export default define.page(function Home() {
               <div class="flex items-center gap-8 text-sm text-white/20 font-light">
                 <a href="/docs" class="hover:text-white/40 transition-colors">Docs</a>
                 <a href="https://github.com/ErickJ3/kage" target="_blank" rel="noopener noreferrer" class="hover:text-white/40 transition-colors">GitHub</a>
-                <a href="https://jsr.io/@erickj3/kage" target="_blank" rel="noopener noreferrer" class="hover:text-white/40 transition-colors">JSR</a>
+                <a href="https://jsr.io/@kage/core" target="_blank" rel="noopener noreferrer" class="hover:text-white/40 transition-colors">JSR</a>
               </div>
             </div>
           </div>
