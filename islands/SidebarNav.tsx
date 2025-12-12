@@ -38,7 +38,9 @@ function Section({ section, currentPath }: SectionProps) {
       >
         <span>{section.title}</span>
         <svg
-          class={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}
+          class={`w-3 h-3 transition-transform duration-200 ${
+            isOpen ? "rotate-90" : ""
+          }`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -78,7 +80,11 @@ export default function SidebarNav({ currentPath }: SidebarNavProps) {
   return (
     <nav class="py-6">
       {navigation.map((section) => (
-        <Section key={section.title} section={section} currentPath={currentPath} />
+        <Section
+          key={section.title}
+          section={section}
+          currentPath={currentPath}
+        />
       ))}
     </nav>
   );

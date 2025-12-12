@@ -5,6 +5,7 @@ This is the official website and documentation for the **Kage**.
 ## About Kage
 
 To learn more about the Kage, check out the complete documentation at:
+
 ```
 content/docs/
 ```

@@ -72,7 +72,7 @@ Returns a custom Response with specified status and headers.
 ```ts
 return ctx.response(data, {
   status: 201,
-  headers: { "X-Custom": "value" }
+  headers: { "X-Custom": "value" },
 });
 ```
 

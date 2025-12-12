@@ -29,7 +29,12 @@ const kageTheme = {
       settings: { foreground: "#61afef" },
     },
     {
-      scope: ["entity.name.type", "entity.name.class", "support.type", "support.class"],
+      scope: [
+        "entity.name.type",
+        "entity.name.class",
+        "support.type",
+        "support.class",
+      ],
       settings: { foreground: "#e5c07b" },
     },
     {
@@ -89,15 +94,28 @@ export async function getHighlighter(): Promise<Highlighter> {
 
 export async function highlight(
   code: string,
-  lang: string = "typescript"
+  lang: string = "typescript",
 ): Promise<string> {
   const hl = await getHighlighter();
 
-  const validLangs = ["typescript", "javascript", "json", "bash", "tsx", "jsx", "ts", "js"];
+  const validLangs = [
+    "typescript",
+    "javascript",
+    "json",
+    "bash",
+    "tsx",
+    "jsx",
+    "ts",
+    "js",
+  ];
   const language = validLangs.includes(lang) ? lang : "typescript";
 
   return hl.codeToHtml(code, {
-    lang: language === "ts" ? "typescript" : language === "js" ? "javascript" : language,
+    lang: language === "ts"
+      ? "typescript"
+      : language === "js"
+      ? "javascript"
+      : language,
     theme: "kage",
   });
 }

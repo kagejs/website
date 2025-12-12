@@ -15,16 +15,13 @@ import { Kage } from "jsr:@kage/core";
 const app = new Kage()
   .state("counter", 0)
   .state("users", new Map<string, { name: string }>())
-
   .get("/counter", (ctx) => {
     return ctx.json({ count: ctx.store.counter });
   })
-
   .post("/counter/increment", (ctx) => {
     ctx.store.counter++;
     return ctx.json({ count: ctx.store.counter });
   })
-
   .listen(8000);
 ```
 
@@ -47,13 +44,12 @@ const app = new Kage<{}, AppState>()
   .state("cache", new Map())
   .state("config", {
     apiKey: Deno.env.get("API_KEY") || "",
-    maxConnections: 10
+    maxConnections: 10,
   })
-
   .get("/config", (ctx) => {
     // ctx.store is fully typed
     return ctx.json({
-      maxConnections: ctx.store.config.maxConnections
+      maxConnections: ctx.store.config.maxConnections,
     });
   });
 ```
@@ -76,7 +72,7 @@ const app = new Kage()
   .use(counterPlugin)
   .get("/stats", (ctx) => {
     return ctx.json({
-      totalRequests: ctx.store.requestCount
+      totalRequests: ctx.store.requestCount,
     });
   });
 ```
@@ -88,7 +84,6 @@ A practical example using state for caching:
 ```ts
 const app = new Kage()
   .state("cache", new Map<string, { data: unknown; expiresAt: number }>())
-
   .get("/data/:key", async (ctx) => {
     const { key } = ctx.params;
     const cached = ctx.store.cache.get(key);
@@ -104,11 +99,12 @@ const app = new Kage()
     // Cache for 5 minutes
     ctx.store.cache.set(key, {
       data,
-      expiresAt: Date.now() + 5 * 60 * 1000
+      expiresAt: Date.now() + 5 * 60 * 1000,
     });
 
     return ctx.json({ data, cached: false });
   });
 ```
 
-> **Note:** State is stored in memory and will be lost on server restart. For persistent storage, use a database.
+> **Note:** State is stored in memory and will be lost on server restart. For
+> persistent storage, use a database.

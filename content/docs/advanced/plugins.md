@@ -3,7 +3,8 @@ title: Plugins
 description: Extend Kage with decorators, derived values, and lifecycle hooks
 ---
 
-Kage provides **core context APIs** to extend your application's functionality. **Plugins** are reusable functions that compose these APIs together.
+Kage provides **core context APIs** to extend your application's functionality.
+**Plugins** are reusable functions that compose these APIs together.
 
 ## Core Context APIs
 
@@ -24,11 +25,9 @@ const app = new Kage()
   // DECORATE: Static values available everywhere
   .decorate("version", "1.0.0")
   .decorate("config", { apiUrl: "https://api.example.com" })
-
   // STATE: Shared mutable state
   .state("requestCount", 0)
   .state("activeUsers", new Set<string>())
-
   // DERIVE: Computed per request
   .derive((c) => {
     const token = c.headers.get("Authorization");
@@ -37,15 +36,14 @@ const app = new Kage()
       isAuthenticated: !!token,
     };
   })
-
   .get("/", (c) => {
     c.store.requestCount++; // Access state
 
     return c.json({
-      version: c.version,           // Access decorator
-      config: c.config,              // Access decorator
+      version: c.version, // Access decorator
+      config: c.config, // Access decorator
       requests: c.store.requestCount, // Access state
-      user: c.user,                  // Access derived value
+      user: c.user, // Access derived value
       isAuthenticated: c.isAuthenticated, // Access derived value
     });
   })
@@ -54,9 +52,11 @@ const app = new Kage()
 
 ## Decorate - Static Values
 
-Use `decorate()` to add **static properties** that are available in all route handlers. These are set once when the app starts and don't change per request.
+Use `decorate()` to add **static properties** that are available in all route
+handlers. These are set once when the app starts and don't change per request.
 
 **When to use:**
+
 - Configuration values (API keys, URLs)
 - Database connections
 - External service clients
@@ -68,14 +68,12 @@ import { Kage } from "jsr:@kage/core";
 const app = new Kage()
   // Add version information
   .decorate("version", "1.0.0")
-
   // Add configuration object
   .decorate("config", {
     apiUrl: "https://api.example.com",
     maxRetries: 3,
     timeout: 5000,
   })
-
   // Add database client
   .decorate("db", {
     query: async (sql: string) => {
@@ -83,13 +81,11 @@ const app = new Kage()
       return [];
     },
   })
-
   // Add logger
   .decorate("logger", {
     info: (msg: string) => console.log(`[INFO] ${msg}`),
     error: (msg: string) => console.error(`[ERROR] ${msg}`),
   })
-
   .get("/", (c) => {
     c.logger.info("Request received");
 
@@ -98,16 +94,15 @@ const app = new Kage()
       apiUrl: c.config.apiUrl,
     });
   })
-
   .get("/users", async (c) => {
     const users = await c.db.query("SELECT * FROM users");
     return c.json({ users });
   })
-
   .listen({ port: 8000 });
 ```
 
 **Key characteristics:**
+
 - ✅ Set once, available everywhere
 - ✅ Type-safe with TypeScript inference
 - ✅ Shared across all requests
@@ -115,9 +110,11 @@ const app = new Kage()
 
 ## Derive - Computed Values
 
-Use `derive()` to add **computed values** that are calculated for each request. Perfect for authentication, parsing tokens, or any per-request logic.
+Use `derive()` to add **computed values** that are calculated for each request.
+Perfect for authentication, parsing tokens, or any per-request logic.
 
 **When to use:**
+
 - Authentication/authorization
 - Parsing headers or cookies
 - Computing request-specific data
@@ -146,7 +143,6 @@ const app = new Kage()
       isAuthenticated: true as const,
     };
   })
-
   .get("/me", (c) => {
     if (!c.isAuthenticated) {
       return c.unauthorized("Login required");
@@ -156,11 +152,11 @@ const app = new Kage()
       user: c.user, // Typed as { id: string, name: string }
     });
   })
-
   .listen({ port: 8000 });
 ```
 
 **Multiple derives:**
+
 ```ts
 const app = new Kage()
   // First derive: authentication
@@ -171,7 +167,6 @@ const app = new Kage()
       isAuthenticated: !!token,
     };
   })
-
   // Second derive: can use previous derives!
   .derive((c) => {
     return {
@@ -179,7 +174,6 @@ const app = new Kage()
       canEdit: c.isAuthenticated && c.user?.role === "admin",
     };
   })
-
   .get("/admin", (c) => {
     if (!c.isAdmin) {
       return c.forbidden("Admin access required");
@@ -187,11 +181,11 @@ const app = new Kage()
 
     return c.json({ message: "Welcome, admin!" });
   })
-
   .listen({ port: 8000 });
 ```
 
 **Key characteristics:**
+
 - ✅ Calculated per request
 - ✅ Can access request headers, params, etc.
 - ✅ Type-safe and composable
@@ -200,15 +194,18 @@ const app = new Kage()
 
 ## State - Shared Mutable State
 
-Use `state()` to add **shared mutable state** that persists across requests. Use sparingly - for counters, caches, or in-memory data.
+Use `state()` to add **shared mutable state** that persists across requests. Use
+sparingly - for counters, caches, or in-memory data.
 
 **When to use:**
+
 - Request counters
 - In-memory caching
 - Rate limiting maps
 - Temporary session storage
 
 **When NOT to use:**
+
 - Persistent data (use a database instead)
 - Large datasets (memory limited)
 - Production session management (use Redis/database)
@@ -219,26 +216,20 @@ import { Kage } from "jsr:@kage/core";
 const app = new Kage()
   // Simple counter
   .state("requestCount", 0)
-
   // Cache with Map
   .state("cache", new Map<string, { data: unknown; expiresAt: number }>())
-
   // Active connections
   .state("activeUsers", new Set<string>())
-
   .use((c, next) => {
     c.store.requestCount++;
     return next();
   })
-
   .get("/stats", (c) =>
     c.json({
       totalRequests: c.store.requestCount,
       cachedItems: c.store.cache.size,
       activeUsers: c.store.activeUsers.size,
-    })
-  )
-
+    }))
   .get("/data/:key", (c) => {
     const { key } = c.params;
     const cached = c.store.cache.get(key);
@@ -257,11 +248,11 @@ const app = new Kage()
 
     return c.json({ data, cached: false });
   })
-
   .listen({ port: 8000 });
 ```
 
 **Key characteristics:**
+
 - ✅ Shared across all requests
 - ✅ Mutable (can be modified)
 - ✅ Persists in memory during app lifetime
@@ -271,13 +262,13 @@ const app = new Kage()
 
 ## Decorate vs Derive vs State
 
-| Feature | `decorate()` | `derive()` | `state()` |
-|---------|-------------|-----------|----------|
-| **Timing** | Set once at startup | Computed per request | Shared across requests |
-| **Mutability** | Immutable | Immutable | Mutable |
-| **Use case** | Config, DB, services | Auth, parsing, computed | Counters, cache, temp data |
-| **Example** | API keys, DB client | User from token | Request counter |
-| **Persistence** | App lifetime | Request lifetime | App lifetime |
+| Feature         | `decorate()`         | `derive()`              | `state()`                  |
+| --------------- | -------------------- | ----------------------- | -------------------------- |
+| **Timing**      | Set once at startup  | Computed per request    | Shared across requests     |
+| **Mutability**  | Immutable            | Immutable               | Mutable                    |
+| **Use case**    | Config, DB, services | Auth, parsing, computed | Counters, cache, temp data |
+| **Example**     | API keys, DB client  | User from token         | Request counter            |
+| **Persistence** | App lifetime         | Request lifetime        | App lifetime               |
 
 **Example combining all three:**
 
@@ -291,11 +282,9 @@ const app = new Kage()
     version: "1.0.0",
     maxRequestsPerMinute: 100,
   })
-
   // STATE: Request counter for rate limiting
   .state("requestCount", 0)
   .state("requestsByIp", new Map<string, number[]>())
-
   // DERIVE: Compute per-request values
   .derive((c) => {
     const token = c.headers.get("Authorization");
@@ -304,7 +293,6 @@ const app = new Kage()
       isAuthenticated: !!token,
     };
   })
-
   .use((c, next) => {
     // Use state for counting
     c.store.requestCount++;
@@ -325,7 +313,6 @@ const app = new Kage()
 
     return next();
   })
-
   .get("/", (c) =>
     c.json({
       // Use decorate
@@ -336,29 +323,29 @@ const app = new Kage()
       // Use derive
       authenticated: c.isAuthenticated,
       user: c.user,
-    })
-  )
-
+    }))
   .listen({ port: 8000 });
 ```
 
 ## Creating Plugins
 
-A **plugin** is a function that takes a Kage instance and returns a modified version. Plugins use the core context APIs (`decorate`, `derive`, `state`) and lifecycle hooks to add reusable functionality:
+A **plugin** is a function that takes a Kage instance and returns a modified
+version. Plugins use the core context APIs (`decorate`, `derive`, `state`) and
+lifecycle hooks to add reusable functionality:
 
 ```ts
 import { Kage, type P } from "jsr:@kage/core";
 
 // Simple plugin with decorate
 function versionPlugin<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.decorate("version", "1.0.0");
 }
 
 // Plugin with derive
 function authPlugin<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.derive((c) => {
     const token = c.headers.get("Authorization");
@@ -371,7 +358,7 @@ function authPlugin<TD extends P, TS extends P, TDR extends P>(
 
 // Plugin with state
 function counterPlugin<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.state("requestCount", 0);
 }
@@ -393,7 +380,8 @@ const app = new Kage()
 
 ## Lifecycle Hooks
 
-Plugins can hook into request lifecycle events. Kage provides several hooks for different stages of request processing:
+Plugins can hook into request lifecycle events. Kage provides several hooks for
+different stages of request processing:
 
 - `onRequest(handler)` - Called when request is received, before routing
 - `onBeforeHandle(handler)` - Called before route handler executes
@@ -408,7 +396,7 @@ Use `onRequest` and `onResponse` for request/response logging and timing:
 import { Kage, type P } from "jsr:@kage/core";
 
 function timing<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app
     .onRequest((_, c) => {
@@ -441,7 +429,7 @@ Use `onBeforeHandle` to validate or short-circuit requests before handlers run:
 
 ```ts
 function authGuard<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.onBeforeHandle((c) => {
     const token = c.headers.get("Authorization");
@@ -487,14 +475,16 @@ Combine multiple hooks in a single plugin:
 import { Kage, type P } from "jsr:@kage/core";
 
 function requestLogger<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app
     .onRequest((req, c) => {
       const requestId = crypto.randomUUID();
       c.set("requestId", requestId);
 
-      console.log(`[${requestId}] -> ${req.method} ${new URL(req.url).pathname}`);
+      console.log(
+        `[${requestId}] -> ${req.method} ${new URL(req.url).pathname}`,
+      );
 
       return null;
     })
@@ -547,7 +537,7 @@ import { Kage, type P } from "jsr:@kage/core";
 
 // Version plugin
 function version<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.decorate("version", "1.0.0");
 }
@@ -570,7 +560,7 @@ function counter(options: { logEvery?: number } = {}) {
 
 // Auth plugin
 function auth<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.derive((c) => {
     const token = c.headers.get("Authorization");
@@ -588,7 +578,7 @@ function auth<TD extends P, TS extends P, TDR extends P>(
 
 // Timing plugin
 function timing<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app
     .onRequest((_, c) => {
@@ -620,14 +610,12 @@ const app = new Kage()
       version: c.version,
       requests: c.store.requestCount,
       authenticated: c.isAuthenticated,
-    })
-  )
+    }))
   .get("/me", (c) =>
     c.json({
       authenticated: c.isAuthenticated,
       user: c.user,
-    })
-  )
+    }))
   .group("/admin", (group) =>
     group
       .use((g) =>
@@ -638,19 +626,20 @@ const app = new Kage()
         )
       )
       .get("/", (c) => c.json({ message: "Admin panel", user: c.user }))
-      .get("/stats", (c) => c.json({ requests: c.store.requestCount }))
-  )
+      .get("/stats", (c) => c.json({ requests: c.store.requestCount })))
   .listen({ port: 8000 });
 ```
 
 ## Plugin Best Practices
 
-- **Type safety**: Use generics `<TD extends P, TS extends P, TDR extends P>` for proper typing
+- **Type safety**: Use generics `<TD extends P, TS extends P, TDR extends P>`
+  for proper typing
 - **Single responsibility**: Each plugin should do one thing well
 - **Composability**: Design plugins to work well with others
 - **Configuration**: Accept options for flexibility
 - **Documentation**: Document what your plugin adds to the context
-- **Return types**: Ensure hooks return the correct types (`null`, `undefined`, or `Response`)
+- **Return types**: Ensure hooks return the correct types (`null`, `undefined`,
+  or `Response`)
 
 ## Plugin Patterns
 
@@ -658,7 +647,7 @@ const app = new Kage()
 
 ```ts
 function authPlugin<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.derive((c) => {
     const token = c.headers.get("Authorization");
@@ -682,7 +671,7 @@ function authPlugin<TD extends P, TS extends P, TDR extends P>(
 
 ```ts
 function database<TD extends P, TS extends P, TDR extends P>(
-  connectionString: string
+  connectionString: string,
 ) {
   return (app: Kage<TD, TS, TDR>) => {
     const db = {
@@ -712,7 +701,7 @@ const app = new Kage()
 
 ```ts
 function cors<TD extends P, TS extends P, TDR extends P>(
-  app: Kage<TD, TS, TDR>
+  app: Kage<TD, TS, TDR>,
 ) {
   return app.onResponse((res) => {
     const headers = new Headers(res.headers);

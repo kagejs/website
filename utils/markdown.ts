@@ -1,5 +1,5 @@
 import { Marked } from "marked";
-import { gfmHeadingId, getHeadingList } from "marked-gfm-heading-id";
+import { getHeadingList, gfmHeadingId } from "marked-gfm-heading-id";
 import { parse as parseYaml } from "@std/yaml";
 import { highlight } from "./shiki.ts";
 
@@ -55,7 +55,13 @@ marked.use({
     }
   },
   renderer: {
-    code({ text, highlighted }: { text: string; lang?: string; highlighted?: string }) {
+    code(
+      { text, highlighted }: {
+        text: string;
+        lang?: string;
+        highlighted?: string;
+      },
+    ) {
       if (highlighted) {
         return `<div class="shiki-wrapper my-6">${highlighted}</div>`;
       }
@@ -83,7 +89,7 @@ export async function parseMarkdown(content: string): Promise<ParsedMarkdown> {
 }
 
 export async function loadMarkdownFile(
-  filePath: string
+  filePath: string,
 ): Promise<ParsedMarkdown> {
   const content = await Deno.readTextFile(filePath);
   return parseMarkdown(content);

@@ -16,6 +16,7 @@ import { t } from "jsr:@kage/core";
 String type with optional constraints.
 
 **Options:**
+
 - `minLength`: number
 - `maxLength`: number
 - `pattern`: string (regex)
@@ -26,6 +27,7 @@ String type with optional constraints.
 Number type (integers and floats).
 
 **Options:**
+
 - `minimum`: number
 - `maximum`: number
 
@@ -34,6 +36,7 @@ Number type (integers and floats).
 Integer type (whole numbers only).
 
 **Options:**
+
 - `minimum`: number
 - `maximum`: number
 
@@ -50,8 +53,8 @@ Object type with defined shape.
 ```ts
 t.Object({
   name: t.String(),
-  age: t.Number()
-})
+  age: t.Number(),
+});
 ```
 
 ### t.Array(type)
@@ -59,7 +62,7 @@ t.Object({
 Array of a specific type.
 
 ```ts
-t.Array(t.String())
+t.Array(t.String());
 ```
 
 ### t.Optional(type)
@@ -67,13 +70,13 @@ t.Array(t.String())
 Makes a type optional (can be undefined).
 
 ```ts
-t.Optional(t.String())
+t.Optional(t.String());
 ```
 
 ## String Formats
 
-| Format | Description |
-|--------|-------------|
+| Format    | Description         |
+| --------- | ------------------- |
 | `"email"` | Valid email address |
-| `"uuid"` | UUID v4 format |
-| `"url"` | Valid URL |
+| `"uuid"`  | UUID v4 format      |
+| `"url"`   | Valid URL           |

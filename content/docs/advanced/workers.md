@@ -3,7 +3,9 @@ title: Workers
 description: Offload CPU-intensive tasks with Web Workers
 ---
 
-Kage provides a simple `worker()` helper that manages Web Worker pools automatically, making it easy to offload CPU-intensive tasks and keep your server responsive.
+Kage provides a simple `worker()` helper that manages Web Worker pools
+automatically, making it easy to offload CPU-intensive tasks and keep your
+server responsive.
 
 ## Basic Usage
 
@@ -23,7 +25,7 @@ const fibonacci = worker(
     }
     return b;
   },
-  { minWorkers: 2, maxWorkers: 4 }
+  { minWorkers: 2, maxWorkers: 4 },
 );
 
 const app = new Kage()
@@ -62,11 +64,11 @@ const heavyTask = worker(
     return data.toUpperCase();
   },
   {
-    minWorkers: 2,        // Minimum workers to keep alive
-    maxWorkers: 8,        // Maximum concurrent workers
-    name: "heavy-task",   // Worker name for debugging
-    trackMetrics: true,   // Track performance metrics
-  }
+    minWorkers: 2, // Minimum workers to keep alive
+    maxWorkers: 8, // Maximum concurrent workers
+    name: "heavy-task", // Worker name for debugging
+    trackMetrics: true, // Track performance metrics
+  },
 );
 ```
 
@@ -93,7 +95,7 @@ const countPrimes = worker(
     }
     return count;
   },
-  { minWorkers: 2, maxWorkers: 4 }
+  { minWorkers: 2, maxWorkers: 4 },
 );
 
 const app = new Kage()
@@ -141,7 +143,7 @@ const processImage = worker(
     // Heavy image processing
     return imageData.split("").reverse().join("");
   },
-  { minWorkers: 2, maxWorkers: 4, name: "image-processor" }
+  { minWorkers: 2, maxWorkers: 4, name: "image-processor" },
 );
 
 // Data analysis worker
@@ -151,7 +153,7 @@ const analyzeData = worker(
     const avg = sum / data.length;
     return { sum, avg, count: data.length };
   },
-  { minWorkers: 1, maxWorkers: 2, name: "data-analyzer" }
+  { minWorkers: 1, maxWorkers: 2, name: "data-analyzer" },
 );
 
 const app = new Kage()
@@ -180,9 +182,9 @@ const fibonacci = worker(
   {
     minWorkers: 2,
     maxWorkers: 4,
-    trackMetrics: true,  // Enable metrics
+    trackMetrics: true, // Enable metrics
     name: "fibonacci",
-  }
+  },
 );
 
 // Metrics are automatically tracked internally
@@ -213,7 +215,7 @@ const processImage = worker(
       checksum: result.toFixed(2),
     };
   },
-  { minWorkers: 2, maxWorkers: 6, name: "image-processor" }
+  { minWorkers: 2, maxWorkers: 6, name: "image-processor" },
 );
 
 const app = new Kage()
@@ -229,7 +231,7 @@ const app = new Kage()
     async (ctx) => {
       const result = await processImage(ctx.body);
       return ctx.json(result, 201);
-    }
+    },
   )
   .post(
     "/batch-process",
@@ -240,7 +242,7 @@ const app = new Kage()
             width: t.Integer(),
             height: t.Integer(),
             filter: t.String(),
-          })
+          }),
         ),
       }),
     },
@@ -257,22 +259,25 @@ const app = new Kage()
         results,
         elapsedMs: elapsed.toFixed(2),
       });
-    }
+    },
   )
   .listen({ port: 8000 });
 ```
 
 ## Best Practices
 
-- **Pool Size**: Set `minWorkers` based on typical load, `maxWorkers` based on CPU cores
+- **Pool Size**: Set `minWorkers` based on typical load, `maxWorkers` based on
+  CPU cores
 - **Task Granularity**: Workers have overhead - use for tasks taking >10ms
 - **Data Transfer**: Minimize data passed to workers (uses structured clone)
-- **Error Handling**: Worker errors are automatically propagated as Promise rejections
+- **Error Handling**: Worker errors are automatically propagated as Promise
+  rejections
 - **Metrics**: Enable `trackMetrics` in development to identify bottlenecks
 
 ## Benefits Over Manual Workers
 
-The `worker()` helper provides several advantages over manual Web Worker management:
+The `worker()` helper provides several advantages over manual Web Worker
+management:
 
 - **No separate files**: Define workers inline with type safety
 - **Automatic pooling**: Worker lifecycle managed automatically

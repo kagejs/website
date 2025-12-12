@@ -35,7 +35,12 @@ const kageTheme = {
       settings: { foreground: "#61afef" },
     },
     {
-      scope: ["entity.name.type", "entity.name.class", "support.type", "support.class"],
+      scope: [
+        "entity.name.type",
+        "entity.name.class",
+        "support.type",
+        "support.class",
+      ],
       settings: { foreground: "#e5c07b" },
     },
     {
@@ -95,7 +100,11 @@ export default function CodeHighlight({
       try {
         const { codeToHtml } = await import("shiki");
         const highlighted = await codeToHtml(code, {
-          lang: lang === "ts" ? "typescript" : lang === "js" ? "javascript" : lang,
+          lang: lang === "ts"
+            ? "typescript"
+            : lang === "js"
+            ? "javascript"
+            : lang,
           theme: kageTheme,
         });
         setHtml(highlighted);
@@ -137,45 +146,59 @@ export default function CodeHighlight({
         </div>
       )}
       <div class="relative">
-        {html ? (
-          <div
-            class="shiki-wrapper [&>pre]:!bg-[#0d0d0f] [&>pre]:!p-4 [&>pre]:!m-0 [&>pre]:border [&>pre]:border-white/[0.08] [&>pre]:overflow-x-auto [&_code]:!text-[13px] [&_code]:!leading-[1.7] [&_code]:font-mono [&_.line]:min-h-[1.7em]"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-        ) : (
-          <div class="bg-[#0d0d0f] border border-white/[0.08] p-4 overflow-x-auto">
-            <pre class="text-[13px] leading-[1.7]">
+        {html
+          ? (
+            <div
+              class="shiki-wrapper [&>pre]:!bg-[#0d0d0f] [&>pre]:!p-4 [&>pre]:!m-0 [&>pre]:border [&>pre]:border-white/[0.08] [&>pre]:overflow-x-auto [&_code]:!text-[13px] [&_code]:!leading-[1.7] [&_code]:font-mono [&_.line]:min-h-[1.7em]"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          )
+          : (
+            <div class="bg-[#0d0d0f] border border-white/[0.08] p-4 overflow-x-auto">
+              <pre class="text-[13px] leading-[1.7]">
               <code ref={codeRef} class="text-[#e6e8ec] font-mono">
                 {code}
               </code>
-            </pre>
-          </div>
-        )}
+              </pre>
+            </div>
+          )}
         <button
           type="button"
           onClick={handleCopy}
           class="absolute top-3 right-3 p-2 text-white/40 hover:text-white/70 hover:bg-white/10 transition-all opacity-0 group-hover:opacity-100"
           title={copied ? "Copied!" : "Copy code"}
         >
-          {copied ? (
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          ) : (
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
-          )}
+          {copied
+            ? (
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            )
+            : (
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+            )}
         </button>
       </div>
     </div>

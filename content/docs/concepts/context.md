@@ -79,7 +79,7 @@ new Kage()
   })
   // Without schema - parse manually
   .post("/raw", async (c) => {
-    const body = await c.request.json()
+    const body = await c.request.json();
     return body;
   })
   .listen({ port: 8000 });
@@ -87,18 +87,18 @@ new Kage()
 
 ## Response Methods
 
-| Method                    | Description                                    | Status |
-| ------------------------- | ---------------------------------------------- | ------ |
-| `c.json(data, status?)`   | Returns JSON with proper Content-Type          | 200    |
-| `c.text(str, status?)`    | Returns plain text response                    | 200    |
-| `c.html(str, status?)`    | Returns HTML response                          | 200    |
-| `c.response(body, init?)` | Custom response with status and headers        | 200    |
-| `c.noContent()`           | Returns 204 No Content                         | 204    |
-| `c.unauthorized(message)` | Returns 401 Unauthorized                       | 401    |
-| `c.forbidden(message)`    | Returns 403 Forbidden                          | 403    |
-| `c.notFound(message)`     | Returns 404 Not Found                          | 404    |
-| `c.badRequest(message)`   | Returns 400 Bad Request                        | 400    |
-| `c.serverError(message)`  | Returns 500 Internal Server Error              | 500    |
+| Method                    | Description                             | Status |
+| ------------------------- | --------------------------------------- | ------ |
+| `c.json(data, status?)`   | Returns JSON with proper Content-Type   | 200    |
+| `c.text(str, status?)`    | Returns plain text response             | 200    |
+| `c.html(str, status?)`    | Returns HTML response                   | 200    |
+| `c.response(body, init?)` | Custom response with status and headers | 200    |
+| `c.noContent()`           | Returns 204 No Content                  | 204    |
+| `c.unauthorized(message)` | Returns 401 Unauthorized                | 401    |
+| `c.forbidden(message)`    | Returns 403 Forbidden                   | 403    |
+| `c.notFound(message)`     | Returns 404 Not Found                   | 404    |
+| `c.badRequest(message)`   | Returns 400 Bad Request                 | 400    |
+| `c.serverError(message)`  | Returns 500 Internal Server Error       | 500    |
 
 ## Status Code Helpers
 
@@ -163,9 +163,8 @@ new Kage()
         created: true,
         id: crypto.randomUUID(),
       },
-      201
-    )
-  )
+      201,
+    ))
   // 202 Accepted
   .post("/async-task", (c) =>
     c.json(
@@ -173,9 +172,8 @@ new Kage()
         taskId: crypto.randomUUID(),
         status: "queued",
       },
-      202
-    )
-  )
+      202,
+    ))
   // 304 Not Modified
   .get("/resource", (c) => {
     const etag = c.headers.get("If-None-Match");

@@ -35,8 +35,7 @@ const app = new Kage()
     c.json({
       userId: c.params.id,
       name: `User ${c.params.id}`,
-    })
-  )
+    }))
   // Multiple parameters
   .get("/orgs/:orgId/repos/:repoId", (c) => {
     const { orgId, repoId } = c.params;
@@ -52,8 +51,7 @@ const app = new Kage()
       version: c.params.version,
       userId: c.params.userId,
       postId: c.params.postId,
-    })
-  )
+    }))
   .listen({ port: 8000 });
 ```
 
@@ -124,16 +122,14 @@ const app = new Kage()
         { id: 1, name: "Alice" },
         { id: 2, name: "Bob" },
       ],
-    })
-  )
+    }))
   // Get single user
   .get("/users/:id", (c) =>
     c.json({
       id: parseInt(c.params.id),
       name: "Alice",
       email: "alice@example.com",
-    })
-  )
+    }))
   // Create user
   .post(
     "/users",
@@ -152,8 +148,8 @@ const app = new Kage()
             ...c.body,
           },
         },
-        201
-      )
+        201,
+      ),
   )
   // Update user
   .put(
@@ -171,7 +167,7 @@ const app = new Kage()
           id: c.params.id,
           ...c.body,
         },
-      })
+      }),
   )
   // Partial update
   .patch(
@@ -188,7 +184,7 @@ const app = new Kage()
           id: c.params.id,
           name: c.body.name,
         },
-      })
+      }),
   )
   // Delete user
   .delete("/users/:id", (c) => c.noContent())
@@ -205,7 +201,6 @@ const app = new Kage()
   // ✅ Specific routes first
   .get("/users/me", (c) => c.json({ currentUser: true }))
   .get("/users/:id", (c) => c.json({ userId: c.params.id }))
-
   // ❌ Wrong order - /users/me would match /users/:id
   // .get("/users/:id", (c) => c.json({ userId: c.params.id }))
   // .get("/users/me", (c) => c.json({ currentUser: true }))
@@ -230,39 +225,34 @@ const app = new Kage()
     c.json({
       id: c.params.orgId,
       name: `Organization ${c.params.orgId}`,
-    })
-  )
+    }))
   // Organization repositories
   .get("/orgs/:orgId/repos", (c) =>
     c.json({
       orgId: c.params.orgId,
       repos: [],
-    })
-  )
+    }))
   // Specific repository
   .get("/orgs/:orgId/repos/:repoId", (c) =>
     c.json({
       orgId: c.params.orgId,
       repoId: c.params.repoId,
       name: `${c.params.orgId}/${c.params.repoId}`,
-    })
-  )
+    }))
   // Repository issues
   .get("/orgs/:orgId/repos/:repoId/issues", (c) =>
     c.json({
       orgId: c.params.orgId,
       repoId: c.params.repoId,
       issues: [],
-    })
-  )
+    }))
   // Specific issue
   .get("/orgs/:orgId/repos/:repoId/issues/:issueId", (c) =>
     c.json({
       orgId: c.params.orgId,
       repoId: c.params.repoId,
       issueId: c.params.issueId,
-    })
-  )
+    }))
   .listen({ port: 8000 });
 ```
 
@@ -281,7 +271,6 @@ const app = new Kage()
   // Implicit JSON response
   .get("/users", () => ({ users: [] }))
   .get("/users/:id", (c) => ({ userId: c.params.id }))
-
   // Or use explicit helpers
   .get("/text", (c) => c.text("Plain text"))
   .get("/html", (c) => c.html("<h1>Hello</h1>"))

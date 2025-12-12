@@ -184,7 +184,7 @@
 }
 
 .zen-code-block::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -1px;
@@ -387,11 +387,13 @@
 }
 
 .doc-link {
-  @apply text-emerald-400 hover:text-emerald-300 underline underline-offset-4 decoration-emerald-400/30 hover:decoration-emerald-300/50 transition-colors;
+  @apply text-emerald-400 hover:text-emerald-300 underline underline-offset-4
+    decoration-emerald-400/30 hover:decoration-emerald-300/50 transition-colors;
 }
 
 .sidebar-link {
-  @apply block px-3 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors;
+  @apply block px-3 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5
+    transition-colors;
 }
 
 .sidebar-link.active {
@@ -399,11 +401,13 @@
 }
 
 .btn-primary {
-  @apply px-6 py-3 bg-emerald-500 text-black text-sm font-medium hover:bg-emerald-400 transition-colors;
+  @apply px-6 py-3 bg-emerald-500 text-black text-sm font-medium
+    hover:bg-emerald-400 transition-colors;
 }
 
 .btn-secondary {
-  @apply px-6 py-3 bg-white/5 border border-white/10 text-sm text-white font-medium hover:bg-white/10 transition-colors;
+  @apply px-6 py-3 bg-white/5 border border-white/10 text-sm text-white
+    font-medium hover:bg-white/10 transition-colors;
 }
 
 /* ==========================================================================
@@ -532,7 +536,7 @@
 }
 
 .docs-content pre::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -1px;
@@ -565,7 +569,7 @@
 }
 
 .docs-content ul li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0.7em;
@@ -661,7 +665,7 @@
 }
 
 .docs-content .shiki-wrapper pre::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -1px;
@@ -684,7 +688,8 @@
 }
 
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-black;
+  @apply focus:outline-none focus:ring-2 focus:ring-emerald-500/50
+    focus:ring-offset-2 focus:ring-offset-black;
 }
 
 /* ==========================================================================
@@ -771,7 +776,7 @@
 }
 
 .markdown-body ul li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0.7em;
@@ -867,7 +872,7 @@
 }
 
 .markdown-body .shiki-wrapper pre::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -1px;

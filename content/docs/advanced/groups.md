@@ -3,7 +3,8 @@ title: Route Groups
 description: Organize routes with shared configuration and middleware
 ---
 
-Route groups allow you to organize routes with shared configuration, middleware, and path prefixes.
+Route groups allow you to organize routes with shared configuration, middleware,
+and path prefixes.
 
 ## Basic Groups
 
@@ -18,8 +19,7 @@ const app = new Kage()
     group
       .get("/users", (c) => c.json({ users: [] }))
       .get("/posts", (c) => c.json({ posts: [] }))
-      .get("/comments", (c) => c.json({ comments: [] }))
-  )
+      .get("/comments", (c) => c.json({ comments: [] })))
   .listen({ port: 8000 });
 
 // Routes:
@@ -52,8 +52,7 @@ const app = new Kage()
       )
       .get("/", (c) => c.json({ message: "Admin panel" }))
       .get("/users", (c) => c.json({ users: [] }))
-      .get("/settings", (c) => c.json({ settings: {} }))
-  )
+      .get("/settings", (c) => c.json({ settings: {} })))
   .listen({ port: 8000 });
 
 // Routes:
@@ -80,15 +79,12 @@ const app = new Kage()
         c.json({
           version: c.apiVersion,
           endpoints: ["/api/info", "/api/status"],
-        })
-      )
+        }))
       .get("/status", (c) =>
         c.json({
           version: c.apiVersion,
           status: "ok",
-        })
-      )
-  )
+        })))
   .listen({ port: 8000 });
 ```
 
@@ -106,14 +102,11 @@ const app = new Kage()
       .group("/v1", (v1) =>
         v1
           .get("/users", (c) => c.json({ users: [], version: "v1" }))
-          .get("/posts", (c) => c.json({ posts: [], version: "v1" }))
-      )
+          .get("/posts", (c) => c.json({ posts: [], version: "v1" })))
       .group("/v2", (v2) =>
         v2
           .get("/users", (c) => c.json({ users: [], version: "v2" }))
-          .get("/posts", (c) => c.json({ posts: [], version: "v2" }))
-      )
-  )
+          .get("/posts", (c) => c.json({ posts: [], version: "v2" }))))
   .listen({ port: 8000 });
 
 // Routes:
@@ -150,14 +143,12 @@ const app = new Kage()
     c.json({
       message: "Welcome!",
       authenticated: c.isAuthenticated,
-    })
-  )
+    }))
   .get("/me", (c) =>
     c.json({
       authenticated: c.isAuthenticated,
       user: c.user,
-    })
-  )
+    }))
   .group("/admin", (group) =>
     group
       // Require authentication for all /admin routes
@@ -173,16 +164,13 @@ const app = new Kage()
         c.json({
           message: "Admin panel",
           user: c.user,
-        })
-      )
+        }))
       .get("/stats", (c) =>
         c.json({
           message: "Statistics",
           user: c.user,
           stats: { requests: 100 },
-        })
-      )
-  )
+        })))
   .listen({ port: 8000 });
 ```
 
@@ -218,8 +206,7 @@ const app = new Kage()
     c.json({
       message: "API Gateway",
       version: "1.0.0",
-    })
-  )
+    }))
   .group("/auth", (auth) =>
     auth
       .post(
@@ -234,11 +221,10 @@ const app = new Kage()
           c.json({
             success: true,
             token: "jwt-token-here",
-          })
+          }),
       )
       .post("/logout", (c) => c.json({ success: true }))
-      .post("/refresh", (c) => c.json({ token: "new-jwt-token" }))
-  )
+      .post("/refresh", (c) => c.json({ token: "new-jwt-token" })))
   .group("/api", (api) =>
     api
       .derive(() => ({ apiVersion: "v1" }))
@@ -247,21 +233,17 @@ const app = new Kage()
           status: "ok",
           version: c.apiVersion,
           requests: c.store.requestCount,
-        })
-      )
+        }))
       .group("/users", (users) =>
         users
           .get("/", (c) => c.json({ users: [] }))
           .get("/:id", (c) => c.json({ userId: c.params.id }))
           .post("/", (c) => c.json({ created: true }, 201))
-          .delete("/:id", (c) => c.noContent())
-      )
+          .delete("/:id", (c) => c.noContent()))
       .group("/posts", (posts) =>
         posts
           .get("/", (c) => c.json({ posts: [] }))
-          .get("/:id", (c) => c.json({ postId: c.params.id }))
-      )
-  )
+          .get("/:id", (c) => c.json({ postId: c.params.id }))))
   .listen({ port: 8000 });
 
 // Routes:
@@ -283,11 +265,13 @@ const app = new Kage()
 Groups and mounting serve different purposes:
 
 **Use Groups when:**
+
 - You want to apply middleware to specific routes
 - Routes share configuration but are part of the same logical app
 - You need nested prefixes with shared context
 
 **Use Mounting when:**
+
 - You want complete module separation
 - Routes are defined in separate files
 - You're building a microservice-like architecture
@@ -309,12 +293,9 @@ const app = new Kage()
   // Use group for inline routes with shared config
   .group("/api/posts", (posts) =>
     posts
-      .use((g) =>
-        g.derive(() => ({ cached: true }))
-      )
+      .use((g) => g.derive(() => ({ cached: true })))
       .get("/", (c) => c.json({ posts: [], cached: c.cached }))
-      .get("/:id", (c) => c.json({ postId: c.params.id, cached: c.cached }))
-  )
+      .get("/:id", (c) => c.json({ postId: c.params.id, cached: c.cached })))
   .listen({ port: 8000 });
 ```
 
@@ -322,6 +303,9 @@ const app = new Kage()
 
 - **Use groups** for routes that share middleware or configuration
 - **Keep nesting shallow** - avoid deeply nested groups (max 2-3 levels)
-- **Name groups clearly** - use descriptive prefixes like `/admin`, `/api`, `/auth`
-- **Apply auth at group level** - don't repeat authentication logic in every route
-- **Combine with mounting** - use mounting for file separation, groups for shared config
+- **Name groups clearly** - use descriptive prefixes like `/admin`, `/api`,
+  `/auth`
+- **Apply auth at group level** - don't repeat authentication logic in every
+  route
+- **Combine with mounting** - use mounting for file separation, groups for
+  shared config

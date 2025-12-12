@@ -17,27 +17,24 @@ new Kage()
   .get("/users/:id", (c) =>
     c.json({
       userId: c.params.id,
-      name: `User ${c.params.id}`
-    })
-  )
+      name: `User ${c.params.id}`,
+    }))
   .get("/orgs/:orgId/repos/:repoId", (c) =>
     c.json({
       organization: c.params.orgId,
       repository: c.params.repoId,
-    })
-  )
+    }))
   .post("/users", (c) =>
     c.json({
       created: true,
-      id: crypto.randomUUID()
-    })
-  )
+      id: crypto.randomUUID(),
+    }))
   .delete("/users/:id", (c) => c.noContent())
   .listen({
     port: 8000,
     onListen: ({ hostname, port }) => {
       console.log(`Server running on http://${hostname}:${port}`);
-    }
+    },
   });
 ```
 
@@ -51,7 +48,8 @@ Visit `http://localhost:8000` to see your server running!
 
 ## Request Validation
 
-Kage includes a built-in schema validation system powered by TypeBox. Define your schemas and get full type inference:
+Kage includes a built-in schema validation system powered by TypeBox. Define
+your schemas and get full type inference:
 
 ```ts
 import { Kage, t } from "jsr:@kage/core";
@@ -82,9 +80,9 @@ new Kage()
             createdAt: new Date().toISOString(),
           },
         },
-        201
+        201,
       );
-    }
+    },
   )
   .listen({ port: 8000 });
 ```
@@ -124,7 +122,7 @@ new Kage()
         limit,
         results: [],
       });
-    }
+    },
   )
   .get(
     "/users/:id",
@@ -133,7 +131,7 @@ new Kage()
         id: t.String({ format: "uuid" }),
       }),
     },
-    (c) => c.json({ userId: c.params.id })
+    (c) => c.json({ userId: c.params.id }),
   );
 ```
 
@@ -180,27 +178,20 @@ Kage provides convenient response helper methods:
 new Kage()
   // JSON response
   .get("/json", (c) => c.json({ message: "Hello" }))
-
   // JSON with custom status code
   .post("/created", (c) => c.json({ id: 1 }, 201))
-
   // Plain text
   .get("/text", (c) => c.text("Plain text response"))
-
   // HTML content
   .get("/html", (c) => c.html("<h1>Hello World</h1>"))
-
   // Custom response with headers
   .get("/custom", (c) =>
     c.response("Custom response", {
       status: 201,
       headers: { "X-Custom-Header": "value" },
-    })
-  )
-
+    }))
   // 204 No Content
   .delete("/users/:id", (c) => c.noContent())
-
   // Status code helpers
   .get("/unauthorized", (c) => c.unauthorized("Login required"))
   .get("/forbidden", (c) => c.forbidden("Access denied"))
@@ -215,6 +206,8 @@ Now that you know the basics, explore these advanced features:
 - [Routing](/docs/concepts/routing) - Dynamic routes and route matching
 - [Middleware](/docs/concepts/middleware) - Composable middleware patterns
 - [Schema Validation](/docs/concepts/schema) - Complete validation guide
-- [Plugins](/docs/advanced/plugins) - Extend Kage with decorators and lifecycle hooks
-- [Router Mounting](/docs/advanced/mounting) - Organize code with modular routers
+- [Plugins](/docs/advanced/plugins) - Extend Kage with decorators and lifecycle
+  hooks
+- [Router Mounting](/docs/advanced/mounting) - Organize code with modular
+  routers
 - [Workers](/docs/advanced/workers) - Offload CPU-intensive tasks

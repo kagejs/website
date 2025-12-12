@@ -8,10 +8,14 @@ allowing you to add logging, authentication, rate limiting, and more.
 
 ## What is Middleware?
 
-Middleware in Kage are functions that receive a context and a `next` function, and return a Response. They follow a simple contract:
+Middleware in Kage are functions that receive a context and a `next` function,
+and return a Response. They follow a simple contract:
 
 ```ts
-type Middleware = (context: Context, next: () => Promise<Response>) => Promise<Response>
+type Middleware = (
+  context: Context,
+  next: () => Promise<Response>,
+) => Promise<Response>;
 ```
 
 **Key characteristics:**
@@ -176,7 +180,8 @@ new Kage()
 
 ## Modifying Responses
 
-Kage middleware can modify responses in two ways: **mutation** or **immutable creation**.
+Kage middleware can modify responses in two ways: **mutation** or **immutable
+creation**.
 
 ### Mutation (Recommended)
 
@@ -238,7 +243,8 @@ function requestId(): Middleware {
 }
 ```
 
-This approach is more verbose but guarantees immutability if that's important for your use case.
+This approach is more verbose but guarantees immutability if that's important
+for your use case.
 
 ### State Management in Middleware
 
@@ -288,8 +294,7 @@ const app = new Kage()
   .get("/stats", (c) =>
     c.json({
       requests: c.store.requestCount,
-    })
-  )
+    }))
   .listen({ port: 8000 });
 ```
 
@@ -324,16 +329,18 @@ new Kage()
 ## Middleware vs Plugins
 
 **Use middleware when** you need to:
+
 - Transform requests/responses for specific routes
 - Short-circuit requests (auth guards, rate limiting)
 - Add headers or modify responses
 - Perform side effects (logging, metrics)
 
 **Use plugins when** you need to:
+
 - Add new properties to context (`decorate`)
 - Add computed values per request (`derive`)
 - Add shared state across requests (`state`)
 - Hook into request lifecycle events
 
-See [Plugins](/docs/advanced/plugins) for more details on extending Kage's functionality.
-
+See [Plugins](/docs/advanced/plugins) for more details on extending Kage's
+functionality.

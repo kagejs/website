@@ -46,10 +46,15 @@ export default define.page(function Home() {
           <div class="max-w-5xl mx-auto px-8 h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-3 group">
               <span class="text-xl font-light tracking-wide">カゲ</span>
-              <span class="text-lg font-medium tracking-tight text-white/80">kage</span>
+              <span class="text-lg font-medium tracking-tight text-white/80">
+                kage
+              </span>
             </a>
             <nav class="flex items-center gap-8">
-              <a href="/docs" class="text-sm text-white/40 hover:text-white/80 transition-colors">
+              <a
+                href="/docs"
+                class="text-sm text-white/40 hover:text-white/80 transition-colors"
+              >
                 Docs
               </a>
               <a
@@ -78,7 +83,7 @@ export default define.page(function Home() {
               </div>
 
               <p class="text-emerald-400/80 text-xs tracking-[0.3em] uppercase mb-8">
-                Web Framework for Deno
+                Clear. Simple. Web-first.
               </p>
 
               <h1 class="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight leading-[1.2] mb-8">
@@ -98,8 +103,18 @@ export default define.page(function Home() {
                   class="group inline-flex items-center gap-3 px-6 py-3 border border-white/10 text-sm font-light hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all"
                 >
                   <span>Get Started</span>
-                  <svg class="w-4 h-4 text-white/40 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  <svg
+                    class="w-4 h-4 text-white/40 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
                   </svg>
                 </a>
                 <div class="flex items-center gap-2 px-4 py-3 font-mono text-xs text-white/30">
@@ -118,7 +133,9 @@ export default define.page(function Home() {
                   </p>
                   <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-6 text-white/90">
                     Simple to start.<br />
-                    <span class="text-white/30">Powerful when you need it.</span>
+                    <span class="text-white/30">
+                      Powerful when you need it.
+                    </span>
                   </h2>
                   <p class="text-white/30 font-light leading-relaxed mb-8">
                     Start with a single endpoint. Scale to complex APIs with
@@ -131,7 +148,10 @@ export default define.page(function Home() {
                       "Inline worker pools",
                       "Native Web Standards",
                     ].map((item) => (
-                      <li key={item} class="flex items-center gap-3 text-sm text-white/40">
+                      <li
+                        key={item}
+                        class="flex items-center gap-3 text-sm text-white/40"
+                      >
                         <span class="w-1 h-1 bg-emerald-500/50" />
                         {item}
                       </li>
@@ -158,32 +178,42 @@ export default define.page(function Home() {
                 {[
                   {
                     title: "Schema Validation",
-                    desc: "TypeBox integration with full type inference. Automatic validation errors.",
+                    desc:
+                      "TypeBox integration with full type inference. Automatic validation errors.",
                   },
                   {
                     title: "Context Extensions",
-                    desc: "decorate, derive, and state for clean, type-safe context management.",
+                    desc:
+                      "decorate, derive, and state for clean, type-safe context management.",
                   },
                   {
                     title: "Worker Pools",
-                    desc: "Inline worker functions with automatic pooling for CPU-intensive tasks.",
+                    desc:
+                      "Inline worker functions with automatic pooling for CPU-intensive tasks.",
                   },
                   {
                     title: "Lifecycle Hooks",
-                    desc: "onRequest, onBeforeHandle, onAfterHandle, onResponse for precise control.",
+                    desc:
+                      "onRequest, onBeforeHandle, onAfterHandle, onResponse for precise control.",
                   },
                   {
                     title: "Modular Routers",
-                    desc: "Built-in prefix support and mounting for clean code organization.",
+                    desc:
+                      "Built-in prefix support and mounting for clean code organization.",
                   },
                   {
                     title: "Native Web APIs",
-                    desc: "Built on Request/Response standards. Zero magic, zero surprises.",
+                    desc:
+                      "Built on Request/Response standards. Zero magic, zero surprises.",
                   },
                 ].map((feature) => (
                   <div key={feature.title} class="group">
-                    <h3 class="text-sm font-medium mb-2 text-white/70 group-hover:text-emerald-400/80 transition-colors">{feature.title}</h3>
-                    <p class="text-sm text-white/25 font-light leading-relaxed">{feature.desc}</p>
+                    <h3 class="text-sm font-medium mb-2 text-white/70 group-hover:text-emerald-400/80 transition-colors">
+                      {feature.title}
+                    </h3>
+                    <p class="text-sm text-white/25 font-light leading-relaxed">
+                      {feature.desc}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -193,13 +223,17 @@ export default define.page(function Home() {
             <div class="max-w-5xl mx-auto">
               <div class="grid md:grid-cols-2 gap-12">
                 <div>
-                  <p class="text-white/20 text-xs tracking-[0.15em] uppercase mb-4">Context Extensions</p>
+                  <p class="text-white/20 text-xs tracking-[0.15em] uppercase mb-4">
+                    Context Extensions
+                  </p>
                   <div class="zen-code-block-sm">
                     <CodeHighlight code={middlewareCode} lang="typescript" />
                   </div>
                 </div>
                 <div>
-                  <p class="text-white/20 text-xs tracking-[0.15em] uppercase mb-4">Modular Routers</p>
+                  <p class="text-white/20 text-xs tracking-[0.15em] uppercase mb-4">
+                    Modular Routers
+                  </p>
                   <div class="zen-code-block-sm">
                     <CodeHighlight code={routerCode} lang="typescript" />
                   </div>
@@ -209,7 +243,9 @@ export default define.page(function Home() {
           </section>
           <section class="py-32 px-8 border-t border-white/[0.03]">
             <div class="max-w-5xl mx-auto text-center">
-              <p class="text-5xl font-light text-white/[0.03] mb-8 select-none tracking-wider">カゲ</p>
+              <p class="text-5xl font-light text-white/[0.03] mb-8 select-none tracking-wider">
+                カゲ
+              </p>
               <h2 class="text-2xl md:text-3xl font-light tracking-tight mb-6 text-white/90">
                 Start building.
               </h2>
@@ -239,13 +275,33 @@ export default define.page(function Home() {
           <div class="max-w-5xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
               <div class="flex items-center gap-3">
-                <span class="text-base font-light text-white/20 tracking-wide">カゲ</span>
-                <span class="text-white/20 text-sm font-light">MIT License</span>
+                <span class="text-base font-light text-white/20 tracking-wide">
+                  カゲ
+                </span>
+                <span class="text-white/20 text-sm font-light">
+                  MIT License
+                </span>
               </div>
               <div class="flex items-center gap-8 text-sm text-white/20 font-light">
-                <a href="/docs" class="hover:text-white/40 transition-colors">Docs</a>
-                <a href="https://github.com/ErickJ3/kage" target="_blank" rel="noopener noreferrer" class="hover:text-white/40 transition-colors">GitHub</a>
-                <a href="https://jsr.io/@kage/core" target="_blank" rel="noopener noreferrer" class="hover:text-white/40 transition-colors">JSR</a>
+                <a href="/docs" class="hover:text-white/40 transition-colors">
+                  Docs
+                </a>
+                <a
+                  href="https://github.com/ErickJ3/kage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-white/40 transition-colors"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://jsr.io/@kage/core"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-white/40 transition-colors"
+                >
+                  JSR
+                </a>
               </div>
             </div>
           </div>

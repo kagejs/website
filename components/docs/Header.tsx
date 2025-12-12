@@ -4,8 +4,12 @@ export default function Header() {
       <div class="h-full max-w-[1400px] mx-auto px-8 flex items-center justify-between">
         <div class="flex items-center gap-10">
           <a href="/" class="flex items-center gap-3 group">
-            <span class="text-lg font-light tracking-wide text-white/70">カゲ</span>
-            <span class="text-base font-medium tracking-tight text-white/80">kage</span>
+            <span class="text-lg font-light tracking-wide text-white/70">
+              カゲ
+            </span>
+            <span class="text-base font-medium tracking-tight text-white/80">
+              kage
+            </span>
           </a>
 
           <nav class="hidden md:flex items-center gap-8">

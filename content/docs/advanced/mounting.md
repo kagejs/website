@@ -3,7 +3,8 @@ title: Mounting Routers
 description: Organize your application with modular routers
 ---
 
-Mount separate router instances to organize your application into modular, maintainable pieces.
+Mount separate router instances to organize your application into modular,
+maintainable pieces.
 
 ## Basic Mounting
 
@@ -38,7 +39,8 @@ const app = new Kage()
 
 ## Router with Prefix
 
-You can define a prefix directly when creating a router using the `prefix` option:
+You can define a prefix directly when creating a router using the `prefix`
+option:
 
 ```ts
 import { Kage } from "jsr:@kage/core";
@@ -55,8 +57,8 @@ const postsRouter = new Kage({ prefix: "/posts" })
 
 // Mount routers - prefix is already included
 const app = new Kage()
-  .mount(usersRouter)  // Routes will be at /users/*
-  .mount(postsRouter)  // Routes will be at /posts/*
+  .mount(usersRouter) // Routes will be at /users/*
+  .mount(postsRouter) // Routes will be at /posts/*
   .listen({ port: 8000 });
 
 // Routes:
@@ -98,11 +100,13 @@ const app3 = new Kage()
 ```
 
 **When to use `prefix` option:**
+
 - When the router has a natural prefix that always applies
 - For self-contained modules (e.g., auth, users, posts)
 - When you want the router to be independently testable with its routes
 
 **When to use `mount()` prefix:**
+
 - When mounting external/third-party routers
 - For flexible API versioning (`/api/v1`, `/api/v2`)
 - When you want to change the prefix without modifying the router
@@ -115,13 +119,13 @@ Mounted routers can access state and decorators from the parent app:
 // Main app with shared state
 const app = new Kage()
   .state("requestCount", 0)
-  .decorate("db", { /* database connection */ });
+  .decorate("db", {/* database connection */});
 
 // Router can access shared state via context
 const apiRouter = new Kage()
   .get("/stats", (ctx) => {
     return ctx.json({
-      requests: ctx.store.requestCount
+      requests: ctx.store.requestCount,
     });
   });
 
@@ -176,16 +180,16 @@ import { authRouter } from "./routes/auth.ts";
 
 const app = new Kage()
   // Mount routers with their built-in prefixes
-  .mount(usersRouter)     // Routes at /users/*
-  .mount(postsRouter)     // Routes at /posts/*
-  .mount(authRouter)      // Routes at /auth/*
+  .mount(usersRouter) // Routes at /users/*
+  .mount(postsRouter) // Routes at /posts/*
+  .mount(authRouter) // Routes at /auth/*
   .listen({ port: 8000 });
 
 // Or mount under a common prefix like /api
 const apiApp = new Kage()
-  .mount("/api", usersRouter)  // Routes at /api/users/*
-  .mount("/api", postsRouter)  // Routes at /api/posts/*
-  .mount(authRouter)           // Routes at /auth/* (no /api prefix)
+  .mount("/api", usersRouter) // Routes at /api/users/*
+  .mount("/api", postsRouter) // Routes at /api/posts/*
+  .mount(authRouter) // Routes at /auth/* (no /api prefix)
   .listen({ port: 8000 });
 ```
 

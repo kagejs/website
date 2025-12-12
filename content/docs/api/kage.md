@@ -8,7 +8,7 @@ The main application class for creating Kage servers.
 ## Constructor
 
 ```ts
-new Kage()
+new Kage();
 ```
 
 Creates a new Kage application instance.

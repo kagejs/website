@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "preact/hooks";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 
 interface TocItem {
   id: string;

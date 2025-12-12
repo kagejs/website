@@ -3,8 +3,8 @@ title: Schema Validation
 description: Built-in request validation with type inference
 ---
 
-Kage includes a built-in schema validation system powered by TypeBox that validates
-requests and provides full TypeScript type inference.
+Kage includes a built-in schema validation system powered by TypeBox that
+validates requests and provides full TypeScript type inference.
 
 ## Body Validation
 
@@ -36,9 +36,9 @@ new Kage()
             createdAt: new Date().toISOString(),
           },
         },
-        201
+        201,
       );
-    }
+    },
   )
   .listen({ port: 8000 });
 ```
@@ -70,7 +70,7 @@ new Kage()
         offset,
         results: [],
       });
-    }
+    },
   )
   .listen({ port: 8000 });
 ```
@@ -94,7 +94,7 @@ app.get(
       name: "User",
       email: "user@example.com",
     });
-  }
+  },
 );
 ```
 

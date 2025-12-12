@@ -21,19 +21,51 @@ export const toc: TocCategory[] = [
   {
     title: "Core Concepts",
     items: [
-      { title: "Routing", slug: "concepts/routing", file: "concepts/routing.md" },
-      { title: "Context", slug: "concepts/context", file: "concepts/context.md" },
-      { title: "Middleware", slug: "concepts/middleware", file: "concepts/middleware.md" },
-      { title: "Schema Validation", slug: "concepts/schema", file: "concepts/schema.md" },
+      {
+        title: "Routing",
+        slug: "concepts/routing",
+        file: "concepts/routing.md",
+      },
+      {
+        title: "Context",
+        slug: "concepts/context",
+        file: "concepts/context.md",
+      },
+      {
+        title: "Middleware",
+        slug: "concepts/middleware",
+        file: "concepts/middleware.md",
+      },
+      {
+        title: "Schema Validation",
+        slug: "concepts/schema",
+        file: "concepts/schema.md",
+      },
     ],
   },
   {
     title: "Advanced",
     items: [
-      { title: "Plugins", slug: "advanced/plugins", file: "advanced/plugins.md" },
-      { title: "Mounting Routers", slug: "advanced/mounting", file: "advanced/mounting.md" },
-      { title: "State Management", slug: "advanced/state", file: "advanced/state.md" },
-      { title: "Workers", slug: "advanced/workers", file: "advanced/workers.md" },
+      {
+        title: "Plugins",
+        slug: "advanced/plugins",
+        file: "advanced/plugins.md",
+      },
+      {
+        title: "Mounting Routers",
+        slug: "advanced/mounting",
+        file: "advanced/mounting.md",
+      },
+      {
+        title: "State Management",
+        slug: "advanced/state",
+        file: "advanced/state.md",
+      },
+      {
+        title: "Workers",
+        slug: "advanced/workers",
+        file: "advanced/workers.md",
+      },
     ],
   },
   {
@@ -97,7 +129,11 @@ export function getNavigation(slug: string): {
   };
 }
 
-export function getSidebarNavigation(): { title: string; href: string; items?: { title: string; href: string }[] }[] {
+export function getSidebarNavigation(): {
+  title: string;
+  href: string;
+  items?: { title: string; href: string }[];
+}[] {
   return toc.map((category) => ({
     title: category.title,
     href: "#",
