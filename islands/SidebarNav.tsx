@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { getSidebarNavigation } from "../data/toc.ts";
+import { getSidebarNavigation } from "@/data/toc.ts";
 
 interface SidebarItem {
   title: string;

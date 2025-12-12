@@ -143,11 +143,6 @@
   }
 }
 
-/* ==========================================================================
-   HERO - Japanese minimalist / Zen aesthetic
-   ========================================================================== */
-
-/* Ensō-inspired circle */
 .zen-circle {
   width: 500px;
   height: 500px;
@@ -176,7 +171,6 @@
   }
 }
 
-/* Zen code blocks */
 .zen-code-block {
   position: relative;
   background: rgba(0, 0, 0, 0.3);
@@ -223,10 +217,6 @@
   margin: 0 !important;
 }
 
-/* ==========================================================================
-   KAGE LOGO
-   ========================================================================== */
-
 .kage-logo {
   width: 32px;
   height: 32px;
@@ -270,10 +260,6 @@
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   opacity: 0.6;
 }
-
-/* ==========================================================================
-   CODE WINDOWS (Landing page)
-   ========================================================================== */
 
 .code-window {
   background: rgba(0, 0, 0, 0.5);
@@ -319,10 +305,6 @@
   background: rgba(255, 255, 255, 0.03);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-
-/* ==========================================================================
-   DOCUMENTATION CODE BLOCKS
-   ========================================================================== */
 
 .code-block {
   @apply bg-black/50 border border-white/10 p-4 overflow-x-auto;
@@ -371,10 +353,6 @@
   color: #abb2bf;
 }
 
-/* ==========================================================================
-   COMPONENTS
-   ========================================================================== */
-
 .glow-emerald {
   box-shadow: 0 0 60px rgba(52, 211, 153, 0.15);
 }
@@ -410,10 +388,6 @@
     font-medium hover:bg-white/10 transition-colors;
 }
 
-/* ==========================================================================
-   ANIMATIONS
-   ========================================================================== */
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -442,10 +416,6 @@
   animation: pulse-subtle 3s ease-in-out infinite;
 }
 
-/* ==========================================================================
-   PROSE STYLES
-   ========================================================================== */
-
 .prose-invert {
   --tw-prose-body: rgb(200 205 212);
   --tw-prose-headings: rgb(240 242 245);
@@ -455,10 +425,6 @@
   --tw-prose-pre-bg: rgb(0 0 0 / 0.4);
   --tw-prose-pre-code: rgb(200 205 212);
 }
-
-/* ==========================================================================
-   DOCUMENTATION CONTENT - Zen aesthetic
-   ========================================================================== */
 
 .docs-content {
   color: rgba(255, 255, 255, 0.6);
@@ -652,7 +618,6 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Shiki code blocks in docs */
 .docs-content .shiki-wrapper {
   margin: 1.5rem 0;
 }
@@ -674,10 +639,6 @@
   background: rgba(52, 211, 153, 0.5);
 }
 
-/* ==========================================================================
-   UTILITIES
-   ========================================================================== */
-
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -691,10 +652,6 @@
   @apply focus:outline-none focus:ring-2 focus:ring-emerald-500/50
     focus:ring-offset-2 focus:ring-offset-black;
 }
-
-/* ==========================================================================
-   MARKDOWN BODY - Uses same styles as docs-content
-   ========================================================================== */
 
 .markdown-body {
   color: rgba(255, 255, 255, 0.6);
@@ -857,7 +814,6 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-/* Shiki code blocks in markdown */
 .markdown-body .shiki-wrapper {
   margin: 1.5rem 0;
 }
@@ -890,10 +846,6 @@
   border: none;
   color: rgba(255, 255, 255, 0.7);
 }
-
-/* ==========================================================================
-   COPY BUTTON
-   ========================================================================== */
 
 .shiki-wrapper {
   position: relative;

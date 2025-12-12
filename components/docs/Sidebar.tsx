@@ -1,4 +1,4 @@
-import SidebarNav from "../../islands/SidebarNav.tsx";
+import SidebarNav from "@/islands/SidebarNav.tsx";
 
 interface SidebarProps {
   currentPath: string;

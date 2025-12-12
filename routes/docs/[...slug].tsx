@@ -1,12 +1,12 @@
 import { HttpError, page } from "fresh";
-import { define } from "../../utils.ts";
-import DocsLayout from "../../components/docs/DocsLayout.tsx";
-import { type Heading, loadMarkdownFile } from "../../utils/markdown.ts";
+import { define } from "@/utils.ts";
+import DocsLayout from "@/components/docs/DocsLayout.tsx";
+import { type Heading, loadMarkdownFile } from "@/utils/markdown.ts";
 import {
   getEntryBySlug,
   getNavigation,
   type NavEntry,
-} from "../../data/toc.ts";
+} from "@/data/toc.ts";
 
 interface Data {
   title: string;

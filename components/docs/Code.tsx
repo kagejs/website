@@ -1,5 +1,5 @@
-import { highlight } from "../../utils/shiki.ts";
-import CopyButton from "../../islands/CopyButton.tsx";
+import { highlight } from "@/utils/shiki.ts";
+import CopyButton from "@/islands/CopyButton.tsx";
 
 interface CodeProps {
   code: string;

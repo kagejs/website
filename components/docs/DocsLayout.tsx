@@ -1,8 +1,8 @@
 import type { ComponentChildren } from "preact";
 import Header from "./Header.tsx";
 import Sidebar from "./Sidebar.tsx";
-import TableOfContents from "../../islands/TableOfContents.tsx";
-import CodeCopyButtons from "../../islands/CodeCopyButtons.tsx";
+import TableOfContents from "@/islands/TableOfContents.tsx";
+import CodeCopyButtons from "@/islands/CodeCopyButtons.tsx";
 
 interface NavEntry {
   title: string;

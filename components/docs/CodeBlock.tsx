@@ -1,4 +1,4 @@
-import CopyButton from "../../islands/CopyButton.tsx";
+import CopyButton from "@/islands/CopyButton.tsx";
 
 interface CodeBlockProps {
   code: string;

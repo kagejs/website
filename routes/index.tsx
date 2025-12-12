@@ -1,5 +1,5 @@
-import { define } from "../utils.ts";
-import CodeHighlight from "../islands/CodeHighlight.tsx";
+import { define } from "@/utils.ts";
+import CodeHighlight from "@/islands/CodeHighlight.tsx";
 
 const heroCode = `import { Kage, t } from "jsr:@kage/core";
 
